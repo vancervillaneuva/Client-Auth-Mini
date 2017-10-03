@@ -64,7 +64,7 @@ const ensureLogin = (req, res, next) => {
 // Post /users
 server.post('/users', (req, res) => {
     const { username, password } = req.body;
-
+    console.log(req.body);
     if (!username || !password) {
         sendUserError('username and password are required', res);
         return;
@@ -81,6 +81,7 @@ server.post('/users', (req, res) => {
             passwordHash: newHash
         });
 
+        console.log(user);
         user.save((err, newUser) => {
             if (err) {
                 sendUserError(err, res);
@@ -94,7 +95,7 @@ server.post('/users', (req, res) => {
 
 server.post('/login', (req, res) => {
     const { username, password } = req.body;
-  
+
     if (!username || !password) {
         sendUserError('username and pasword are required', res);
         return;
